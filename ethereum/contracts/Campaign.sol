@@ -24,7 +24,6 @@ contract Campaign {
 		mapping(address => bool) approvals;
 	}
 
-	// Request[] public requests;
 	mapping(uint256 => Request) public requests;
 	uint256 private currentIndex = 0;
 	address public manager;
