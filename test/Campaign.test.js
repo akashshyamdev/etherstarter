@@ -53,10 +53,20 @@ describe('Campaigns', () => {
 	});
 
 	it('contribute money as approvers', async () => {
-		await campaign.methods.contribute().send({ from: accounts[1], value: '200' });
+		await campaign.methods.contribute().send({ from: accounts[1], value: '1000' });
 
 		const isContributor = await campaign.methods.approvers(accounts[1]).call();
 
 		assert(isContributor);
+	});
+
+	it('requires a minimum contribution', async () => {
+		try {
+			await campaign.methods.contribute().send({ from: accounts[1], value: '1' });
+
+			assert(false);
+		} catch (err) {
+			assert(err);
+		}
 	});
 });
