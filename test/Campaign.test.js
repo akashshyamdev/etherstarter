@@ -7,20 +7,6 @@ const web3 = new Web3(ganache.provider());
 const compiledFactory = require('../ethereum/build/CampaignFactory.json');
 const compiledCampaign = require('../ethereum/build/Campaign.json');
 
-const cConfig = {
-	cColors: {
-		green: '\x1b[36m%s\x1b[32m',
-		yellow: '\x1b[36m%s\x1b[33m',
-		red: '\x1b[36m%s\x1b[31m',
-	},
-	cUnicodes: {
-		check: '✓',
-		cross: '⨯',
-		ether: '⧫',
-	},
-	cSpaces: (ns) => Array(ns + 1).join(' '),
-};
-
 let accounts;
 let factory;
 let campaignAddress;
@@ -82,5 +68,25 @@ describe('Campaigns', () => {
 		assert.strictEqual(description, request.description);
 		assert.strictEqual(amount, request.value);
 		assert.strictEqual(recipient, request.recipient);
+	});
+
+	it('processes requests', async () => {
+		await campaign.methods.contribute().send({
+			from: accounts[0],
+			value: web3.utils.toWei('10', 'ether'),
+		});
+
+		await campaign.methods
+			.createRequest('Buy Inventory', web3.utils.toWei('5', 'ether'), accounts[1])
+			.send({ from: accounts[0], gas: '1000000' });
+
+		await campaign.methods.approveRequest(0).send({ from: accounts[0], gas: '1000000' });
+		await campaign.methods.finalizeRequest(0).send({ from: accounts[0], gas: '1000000' });
+
+		let balance = await web3.eth.getBalance(accounts[1]);
+
+		balance = parseFloat(web3.utils.fromWei(balance, 'ether'));
+
+		assert(balance > 104);
 	});
 });
