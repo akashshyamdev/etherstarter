@@ -30,6 +30,7 @@ const web3 = new Web3(provider);
 	} catch (e) {
 		console.log('Contract deploy error: ', e);
 	}
+
 	// ENDING SCRIPT PROCESS
 	process.exit();
 })();
