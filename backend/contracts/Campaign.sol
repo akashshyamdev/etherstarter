@@ -55,21 +55,14 @@ contract Campaign {
 		address recipient
 	) public restricted {
 		Request storage newRequestInStorage = requests[currentIndex];
+
 		newRequestInStorage.description = description;
 		newRequestInStorage.value = value;
 		newRequestInStorage.recipient = recipient;
 		newRequestInStorage.complete = false;
 		newRequestInStorage.approvalCount = 0;
-		currentIndex++;
-		//     Request memory newRequest = Request({
-		//        description: description,
-		//        value: value,
-		//        recipient: recipient,
-		//        complete: false,
-		//        approvalCount: 0
-		//     });
 
-		//     requests.push(newRequest);
+		currentIndex++;
 	}
 
 	function approveRequest(uint256 index) public {
