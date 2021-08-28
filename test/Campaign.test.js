@@ -69,4 +69,18 @@ describe('Campaigns', () => {
 			assert(err);
 		}
 	});
+
+	it('allows manager to make payment request', async () => {
+		let description = 'Buy ';
+		let amount = '100';
+		let recipient = accounts[1];
+
+		await campaign.methods.createRequest(description, amount, recipient).send({ from: accounts[0], gas: '1000000' });
+
+		const request = await campaign.methods.requests(0).call();
+
+		assert.strictEqual(description, request.description);
+		assert.strictEqual(amount, request.value);
+		assert.strictEqual(recipient, request.recipient);
+	});
 });
