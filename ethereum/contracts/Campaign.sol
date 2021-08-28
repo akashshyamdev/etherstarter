@@ -18,7 +18,7 @@ contract Campaign {
 	struct Request {
 		string description;
 		uint256 value;
-		address recipient;
+		address payable recipient;
 		bool complete;
 		uint256 approvalCount;
 		mapping(address => bool) approvals;
@@ -36,7 +36,7 @@ contract Campaign {
 		_;
 	}
 
-	constructor(uint256 minimum, address creator) {
+	constructor(uint256 minimum, address creator) public {
 		manager = creator;
 		minimumContribution = minimum;
 	}
@@ -51,7 +51,7 @@ contract Campaign {
 	function createRequest(
 		string memory description,
 		uint256 value,
-		address recipient
+		address payable recipient
 	) public restricted {
 		Request storage newRequestInStorage = requests[currentIndex];
 
@@ -80,7 +80,7 @@ contract Campaign {
 		require(request.approvalCount > (approversCount / 2));
 		require(!request.complete);
 
-		payable(request.recipient).transfer(request.value);
+		request.recipient.transfer(request.value);
 		request.complete = true;
 	}
 }

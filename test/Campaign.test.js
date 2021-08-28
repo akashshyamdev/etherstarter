@@ -13,9 +13,6 @@ let campaignAddress;
 let campaign;
 
 beforeEach(async () => {
-	// console.log(JSON.parse(compiledFactory).abi);
-	// console.log(JSON.parse(compiledCampaign));
-
 	accounts = await web3.eth.getAccounts();
 
 	factory = await new web3.eth.Contract(JSON.parse(compiledFactory).abi)
