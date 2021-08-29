@@ -56,7 +56,7 @@ export default function CampaignDetails({
 		try {
 			const accounts = await web3.eth.getAccounts();
 
-			await factory.methods.createCampaign(formData.contribution).send({ from: accounts[0] });
+			const campaign = createCampaignInstance(router.query.address as string);
 
 			router.push('/');
 		} catch (err) {
@@ -88,6 +88,12 @@ export default function CampaignDetails({
 						title={requestsCount}
 						subtitle='Number of Requests'
 						content='Number of funding requests for various business purposes like buying inventory, conducting studies etc'
+					/>
+
+					<Card
+						title={approversCount}
+						subtitle='Number of Contributors'
+						content='Number of people who have contributed in the campaign and support it.'
 					/>
 
 					<Card title={balance} subtitle='Funds Raised(ether)' content='Total funds raised till date' />
