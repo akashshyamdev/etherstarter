@@ -11,7 +11,7 @@ export default function Navbar() {
 
 			<div className='h-20 flex flex-row items-center'>
 				<Link href='/'>
-					<a className='text-xl font-display px-5'>Campaigns</a>
+					<a className='text-xl font-display px-7'>Campaigns</a>
 				</Link>
 
 				<button className='bg-blue-700 h-full'>
