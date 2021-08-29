@@ -12,12 +12,6 @@ export async function getServerSideProps(context) {
 }
 
 export default function CampaignList({ campaigns }) {
-	useEffect(() => {
-		(async () => {
-			console.log(campaigns);
-		})();
-	});
-
 	return (
 		<>
 			<div className='flex flex-row justify-between'>
