@@ -1,20 +1,22 @@
 import React from 'react';
-
 import web3 from '../../services/web3';
 import factory from '../../services/factory';
 import Heading from '../../components/Heading';
 import Alert from '../../components/Alert';
 import { useRouter } from 'next/dist/client/router';
+import Loader from '../../components/Loader';
 
 export default function NewCampaign() {
 	const router = useRouter();
 
 	const [amount, setAmount] = React.useState<number | null>(0);
+	const [loading, setLoading] = React.useState<boolean>(false);
 	const [message, setMessage] = React.useState<string>('');
 
 	const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
+		setLoading(true);
 		setMessage('');
 
 		try {
@@ -25,6 +27,7 @@ export default function NewCampaign() {
 			router.push('/');
 		} catch (err) {
 			setMessage(err.message);
+			setLoading(false);
 		}
 	};
 
@@ -56,12 +59,16 @@ export default function NewCampaign() {
 					</div>
 
 					<div className='flex items-center justify-between mt-10'>
-						<button
-							type='submit'
-							className='bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded focus:outline-none focus:shadow-outline'
-						>
-							Create Campaign
-						</button>
+						{!loading ? (
+							<button
+								type='submit'
+								className='bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+							>
+								Create Campaign
+							</button>
+						) : (
+							<Loader />
+						)}
 					</div>
 				</form>
 			</div>
