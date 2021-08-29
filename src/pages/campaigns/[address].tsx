@@ -1,6 +1,9 @@
 import { useRouter } from 'next/dist/client/router';
+import web3 from '../../services/web3';
+import factory from '../../services/factory';
 import React from 'react';
 import Card from '../../components/Card';
+import Form from '../../components/Form';
 import Heading from '../../components/Heading';
 import createCampaignInstance from '../../services/campaign';
 
@@ -38,6 +41,30 @@ export default function CampaignDetails({
 	minimumContribution,
 	requestsCount,
 }: CampaignDetailsProps) {
+	const router = useRouter();
+
+	const [loading, setLoading] = React.useState<boolean>(false);
+	const [message, setMessage] = React.useState<string>('');
+	const [formData, setFormData] = React.useState({ contribution: 0 });
+
+	const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+
+		setLoading(true);
+		setMessage('');
+
+		try {
+			const accounts = await web3.eth.getAccounts();
+
+			await factory.methods.createCampaign(formData.contribution).send({ from: accounts[0] });
+
+			router.push('/');
+		} catch (err) {
+			setMessage(err.message);
+			setLoading(false);
+		}
+	};
+
 	return (
 		<div>
 			<Heading>Campaign Details</Heading>
@@ -64,7 +91,16 @@ export default function CampaignDetails({
 				<Card title={balance} subtitle='Funds Raised(ether)' content='Total funds raised till date' />
 			</div>
 
-			<div className='w-2/5'></div>
+			<div className='w-2/5'>
+				<Form
+					loading={loading}
+					onSubmit={onSubmit}
+					formState={formData}
+					setLoading={setLoading}
+					setFormState={setFormData}
+					data={[{ name: 'contribution', label: 'Contribution(ether)', placeholder: '10', inputType: 'number' }]}
+				/>
+			</div>
 		</div>
 	);
 }
