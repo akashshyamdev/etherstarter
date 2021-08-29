@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
 import factory from '../services/factory';
+import Heading from '../components/Heading';
 
 export async function getServerSideProps(context) {
 	const campaigns = await factory.methods?.getCampaigns().call();
@@ -20,7 +21,7 @@ export default function CampaignList({ campaigns }) {
 	return (
 		<>
 			<div className='flex flex-row justify-between'>
-				<h1 className='text-6xl mb-10 font-display'>Campaign List</h1>
+				<Heading>Campaign List</Heading>
 			</div>
 
 			<div className='w-3/5'>
