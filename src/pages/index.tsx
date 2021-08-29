@@ -29,7 +29,7 @@ export default function CampaignList({ campaigns }) {
 					<div key={address} className='border rounded-lg px-7 py-7'>
 						<h4 className='text-2xl'>{address}</h4>
 
-						<Link href='/'>
+						<Link href={`/campaigns/${address}`}>
 							<a className='text-blue-600 mt-5'>View Campaign</a>
 						</Link>
 					</div>
