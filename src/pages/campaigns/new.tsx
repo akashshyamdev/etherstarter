@@ -4,7 +4,6 @@ import factory from '../../services/factory';
 import Heading from '../../components/Heading';
 import Alert from '../../components/Alert';
 import { useRouter } from 'next/dist/client/router';
-import Loader from '../../components/Loader';
 import Form from '../../components/Form';
 
 export default function NewCampaign() {
@@ -40,12 +39,14 @@ export default function NewCampaign() {
 
 			<div className='w-full max-w-xs mt-10'>
 				<Form
+					loading={loading}
 					onSubmit={onSubmit}
+					formState={formData}
+					setLoading={setLoading}
+					setFormState={setFormData}
 					data={[
 						{ name: 'minContribution', label: 'Minimum Contribution(wei)', placeholder: '1000', inputType: 'number' },
 					]}
-					formState={formData}
-					setFormState={setFormData}
 				/>
 			</div>
 		</div>
