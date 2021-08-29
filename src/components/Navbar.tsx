@@ -14,9 +14,11 @@ export default function Navbar() {
 					<a className='text-xl font-display px-7'>Campaigns</a>
 				</Link>
 
-				<button className='bg-blue-700 h-full'>
-					<PlusIcon className='h-full w-20 p-5 text-white' />
-				</button>
+				<Link href='/campaigns/new'>
+					<a className='bg-blue-700 h-full'>
+						<PlusIcon className='h-full w-20 p-5 text-white' />
+					</a>
+				</Link>
 			</div>
 		</header>
 	);
