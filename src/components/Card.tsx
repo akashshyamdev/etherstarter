@@ -9,7 +9,7 @@ interface CardProps {
 
 export default function Card({ content, subtitle, title }: CardProps) {
 	return (
-		<div className='border-2 py-5 px-5 rounded w-3/5'>
+		<div className='border-2 py-5 px-5 rounded w-full'>
 			<h3 className='text-3xl truncate'>{title}</h3>
 			<h6 className='text-lg text-gray-400'>{subtitle}</h6>
 
