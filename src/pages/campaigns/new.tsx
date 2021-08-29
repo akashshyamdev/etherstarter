@@ -4,8 +4,11 @@ import web3 from '../../services/web3';
 import factory from '../../services/factory';
 import Heading from '../../components/Heading';
 import Alert from '../../components/Alert';
+import { useRouter } from 'next/dist/client/router';
 
 export default function NewCampaign() {
+	const router = useRouter();
+
 	const [amount, setAmount] = React.useState<number | null>(0);
 	const [message, setMessage] = React.useState<string>('');
 
@@ -18,6 +21,8 @@ export default function NewCampaign() {
 			const accounts = await web3.eth.getAccounts();
 
 			await factory.methods.createCampaign(amount).send({ from: accounts[0] });
+
+			router.push('/');
 		} catch (err) {
 			setMessage(err.message);
 		}
