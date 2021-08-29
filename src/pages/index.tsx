@@ -21,7 +21,6 @@ export default function CampaignList({ campaigns }) {
 		<>
 			<div className='flex flex-row justify-between'>
 				<h1 className='text-6xl mb-10 font-display'>Campaign List</h1>
-				{/* <button className='bg-blue-700 text-white rounded-md h-24 text-2xl px-10 py-3'>Create Campaign</button> */}
 			</div>
 
 			<div className='w-3/5'>
