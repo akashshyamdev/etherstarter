@@ -121,4 +121,8 @@ contract Campaign {
 	{
 		return (minimumContribution, address(this).balance, requestsCount, approversCount, manager);
 	}
+
+	function getRequestsCount() public view returns (uint256) {
+		return requestsCount;
+	}
 }
