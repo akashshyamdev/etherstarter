@@ -12,6 +12,8 @@ export default function NewCampaign() {
 	const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
+		setMessage('');
+
 		try {
 			const accounts = await web3.eth.getAccounts();
 
