@@ -29,6 +29,7 @@ export default function NewCampaign() {
 						</label>
 
 						<input
+							required
 							id='username'
 							type='number'
 							value={amount}
