@@ -9,15 +9,15 @@ interface FormData {
 }
 
 interface FormProps {
-	formState: Object;
+	loading: boolean;
 	data: FormData[];
-	setFormState: React.Dispatch<React.SetStateAction<FormProps['formState']>>;
+	formState: Object;
 	onSubmit: FormEventHandler<HTMLFormElement>;
+	setLoading: React.Dispatch<React.SetStateAction<FormProps['loading']>>;
+	setFormState: React.Dispatch<React.SetStateAction<FormProps['formState']>>;
 }
 
-export default function Form({ onSubmit, data, formState, setFormState }: FormProps) {
-	const [loading, setLoading] = React.useState(false);
-
+export default function Form({ onSubmit, data, formState, setFormState, loading, setLoading }: FormProps) {
 	return (
 		<form onSubmit={onSubmit} className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'>
 			{data.map(({ label, placeholder, name, inputType }) => (
