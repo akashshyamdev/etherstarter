@@ -26,12 +26,13 @@ contract Campaign {
 
 	address public manager;
 
-	uint256 public minimumContribution;
-	uint256 public approversCount;
-	uint256 public requestsCount;
 	uint256 requestIndex = 0;
+	uint256 public minimumContribution;
 
+	uint256 public approversCount;
 	mapping(address => bool) public approvers;
+
+	uint256 public requestsCount;
 	mapping(uint256 => Request) public requests;
 
 	modifier restricted() {
@@ -105,5 +106,19 @@ contract Campaign {
 
 	function getRequestsCount() public view returns (uint256) {
 		return requestsCount;
+	}
+
+	function getSummary()
+		public
+		view
+		returns (
+			uint256,
+			uint256,
+			uint256,
+			uint256,
+			address
+		)
+	{
+		return (minimumContribution, address(this).balance, requestsCount, approversCount, manager);
 	}
 }
