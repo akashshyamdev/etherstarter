@@ -53,11 +53,14 @@ export default function CampaignDetails({
 		setLoading(true);
 		setMessage('');
 
+		const campaign = createCampaignInstance(router.query.address as string);
+
 		try {
 			const accounts = await web3.eth.getAccounts();
 
-			const campaign = createCampaignInstance(router.query.address as string);
-
+			await campaign.methods
+				.contribute()
+				.send({ from: accounts[0], value: web3.utils.toWei(formData.contribution, 'ether') });
 			router.push('/');
 		} catch (err) {
 			setMessage(err.message);
