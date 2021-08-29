@@ -12,14 +12,15 @@ interface FormProps {
 	loading: boolean;
 	data: FormData[];
 	formState: Object;
+	className?: string;
 	onSubmit: FormEventHandler<HTMLFormElement>;
 	setLoading: React.Dispatch<React.SetStateAction<FormProps['loading']>>;
 	setFormState: React.Dispatch<React.SetStateAction<FormProps['formState']>>;
 }
 
-export default function Form({ onSubmit, data, formState, setFormState, loading, setLoading }: FormProps) {
+export default function Form({ onSubmit, data, className, formState, setFormState, loading, setLoading }: FormProps) {
 	return (
-		<form onSubmit={onSubmit} className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'>
+		<form onSubmit={onSubmit} className={`bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 ${className}`}>
 			{data.map(({ label, placeholder, name, inputType }) => (
 				<div className='mb-4'>
 					<label className='block font-display tracking-wide text-gray-700 text-sm font-bold mb-2' htmlFor={name}>

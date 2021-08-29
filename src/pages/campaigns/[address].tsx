@@ -69,37 +69,49 @@ export default function CampaignDetails({
 		<div>
 			<Heading>Campaign Details</Heading>
 
-			<div className='grid grid-cols-2 gap-x-16 gap-y-10'>
-				<Card
-					title={manager}
-					subtitle='Address of Manager'
-					content='The address of the manager who created this campaign and can create requests to withdraw money'
-				/>
+			<div className='flex flex-row'>
+				{/* Cards */}
+				<div className='grid grid-cols-2 gap-x-16 gap-y-10 w-3/5'>
+					<Card
+						title={manager}
+						subtitle='Address of Manager'
+						content='The address of the manager who created this campaign and can create requests to withdraw money'
+					/>
 
-				<Card
-					title={minimumContribution}
-					subtitle='Minimum Contribution(wei)'
-					content='You must contribute at least this much to become an approver'
-				/>
+					<Card
+						title={minimumContribution}
+						subtitle='Minimum Contribution(wei)'
+						content='You must contribute at least this much to become an approver'
+					/>
 
-				<Card
-					title={requestsCount}
-					subtitle='Number of Requests'
-					content='Number of funding requests for various business purposes like buying inventory, conducting studies etc'
-				/>
+					<Card
+						title={requestsCount}
+						subtitle='Number of Requests'
+						content='Number of funding requests for various business purposes like buying inventory, conducting studies etc'
+					/>
 
-				<Card title={balance} subtitle='Funds Raised(ether)' content='Total funds raised till date' />
-			</div>
+					<Card title={balance} subtitle='Funds Raised(ether)' content='Total funds raised till date' />
+				</div>
 
-			<div className='w-2/5'>
-				<Form
-					loading={loading}
-					onSubmit={onSubmit}
-					formState={formData}
-					setLoading={setLoading}
-					setFormState={setFormData}
-					data={[{ name: 'contribution', label: 'Contribution(ether)', placeholder: '10', inputType: 'number' }]}
-				/>
+				{/* Contribute Form */}
+				<div className='w-2/5 pl-20'>
+					<Form
+						loading={loading}
+						onSubmit={onSubmit}
+						formState={formData}
+						className='border-2'
+						setLoading={setLoading}
+						setFormState={setFormData}
+						data={[
+							{
+								name: 'contribution',
+								label: 'Amount to Contribute(ether)',
+								placeholder: '10',
+								inputType: 'number',
+							},
+						]}
+					/>
+				</div>
 			</div>
 		</div>
 	);
