@@ -2,6 +2,6 @@ import web3 from './web3';
 import CampaignFactory from '../../ethereum/build/CampaignFactory.json';
 
 // @ts-ignore
-const instance = new web3.eth.Contract(CampaignFactory.abi, '0xc85F2F9F07aa063326a089F4d1288D45b86a77f2');
+const instance = new web3.eth.Contract(CampaignFactory.abi, '0x6A1F95C44525E2ac6650158c9104266Be9846A67');
 
 export default instance;
