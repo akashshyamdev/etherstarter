@@ -46,7 +46,7 @@ export default function Table({ data, className, isManager, onApprove, onFinaliz
 						))}
 
 						<td className='border px-8 py-4'>
-							{!row.completed ? (
+							{!row.completed && (
 								<button
 									type='submit'
 									onClick={() => onApprove(rowIdx)}
@@ -54,8 +54,6 @@ export default function Table({ data, className, isManager, onApprove, onFinaliz
 								>
 									Approve Request
 								</button>
-							) : (
-								<p className='text-center'>&mdash;</p>
 							)}
 						</td>
 
