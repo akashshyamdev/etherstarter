@@ -9,11 +9,13 @@ export default function Requests() {
 
 	return (
 		<div>
-			<Heading>Request List</Heading>
+			<div className='flex flex-row justify-between items-center'>
+				<Heading>Request List</Heading>
 
-			<Link href={`/campaigns/${address}/requests/new`}>
-				<a className='text-blue-600 mt-5'>View Campaign</a>
-			</Link>
+				<Link href={`/campaigns/${address}/requests/new`}>
+					<a className='text-blue-600 text-2xl mt-5'>View Campaign</a>
+				</Link>
+			</div>
 		</div>
 	);
 }
