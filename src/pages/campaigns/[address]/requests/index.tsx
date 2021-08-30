@@ -44,6 +44,14 @@ export default function Requests({ requests }) {
 		await campaign.methods.approveRequest(rowIdx).send({ from: accounts[0] });
 	};
 
+	const onFinalize = async (rowIdx: number) => {
+		const campaign = await createCampaignInstance(address as string);
+
+		const accounts = await web3.eth.getAccounts();
+
+		await campaign.methods.finalizeRequest(rowIdx).send({ from: accounts[0] });
+	};
+
 	return (
 		<div>
 			<div className='flex flex-row justify-between items-center'>
@@ -54,7 +62,7 @@ export default function Requests({ requests }) {
 				</Link>
 			</div>
 
-			<Table data={requests} className='mt-10' isManager={true} onApprove={onApprove} />
+			<Table data={requests} className='mt-10' isManager={true} onFinalize={onFinalize} onApprove={onApprove} />
 		</div>
 	);
 }

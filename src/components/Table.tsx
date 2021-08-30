@@ -10,9 +10,10 @@ interface TableProps {
 	className?: string;
 	isManager?: boolean;
 	onApprove: (index: number) => void;
+	onFinalize: (index: number) => void;
 }
 
-export default function Table({ data, className, isManager, onApprove }: TableProps) {
+export default function Table({ data, className, isManager, onApprove, onFinalize }: TableProps) {
 	return (
 		<table className={`${className}`}>
 			<thead className='bg-gray-100 rounded-t-xl uppercase text-gray-700 font-thin font-sans tracking-wider'>
@@ -29,7 +30,7 @@ export default function Table({ data, className, isManager, onApprove }: TablePr
 
 			<tbody>
 				{data.map((row, rowIdx) => (
-					<tr className='bg-gray-50' key={rowIdx}>
+					<tr className={`bg-gray-50 ${row.complete && 'text-gray-400'}`} key={rowIdx}>
 						{Object.values(row).map((value, colIdx) => (
 							<td key={colIdx} className='border px-8 py-4'>
 								{typeof value === 'string' ? (
@@ -52,10 +53,11 @@ export default function Table({ data, className, isManager, onApprove }: TablePr
 							</button>
 						</td>
 
-						{isManager && (
+						{row.complete && (
 							<td className='border px-8 py-4'>
 								<button
 									type='submit'
+									onClick={() => onFinalize(rowIdx)}
 									className='bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded focus:outline-none focus:shadow-outline'
 								>
 									Finalize Request
