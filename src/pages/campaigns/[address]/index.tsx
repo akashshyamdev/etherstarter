@@ -77,14 +77,16 @@ export default function CampaignDetails({
 	return (
 		<div>
 			<div className='flex flex-row justify-between items-center'>
-				<Heading>Campaign Details</Heading>
+				<Heading className='mb-0' style={{ marginBlockEnd: '0px' }}>
+					Campaign Details
+				</Heading>
 
 				<Link href={`/campaigns/${address}/requests`}>
 					<a className='text-blue-600 text-2xl mt-5'>Request List</a>
 				</Link>
 			</div>
 
-			<div className='flex flex-row mt-10'>
+			<div className='flex flex-row mt-16'>
 				{/* Cards */}
 				<div className='grid grid-cols-2 gap-x-16 gap-y-10 w-3/5'>
 					<Card
