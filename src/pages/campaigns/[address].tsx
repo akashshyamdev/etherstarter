@@ -6,6 +6,7 @@ import Card from '../../components/Card';
 import Form from '../../components/Form';
 import Heading from '../../components/Heading';
 import createCampaignInstance from '../../services/campaign';
+import Alert from '../../components/Alert';
 
 interface CampaignDetailsProps {
 	minimumContribution: number;
@@ -66,6 +67,7 @@ export default function CampaignDetails({
 			router.replace(`/campaigns/${address}`);
 		} catch (err) {
 			setMessage(err.message);
+			setFormData({ ...formData, contribution: 0 });
 			setLoading(false);
 		}
 	};
@@ -110,6 +112,8 @@ export default function CampaignDetails({
 
 				{/* Contribute Form */}
 				<div className='w-2/5 pl-20'>
+					{message && <Alert className='mb-5'>{message}</Alert>}
+
 					<Form
 						loading={loading}
 						onSubmit={onSubmit}
