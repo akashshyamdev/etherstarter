@@ -99,7 +99,11 @@ export default function CampaignDetails({
 						content='Number of people who have contributed in the campaign and support it.'
 					/>
 
-					<Card title={balance} subtitle='Funds Raised(ether)' content='Total funds raised till date' />
+					<Card
+						title={web3.utils.fromWei(balance, 'ether')}
+						subtitle='Funds Raised(ether)'
+						content='Total funds raised till date'
+					/>
 				</div>
 
 				{/* Contribute Form */}
