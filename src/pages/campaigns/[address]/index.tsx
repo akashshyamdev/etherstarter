@@ -131,6 +131,7 @@ export default function CampaignDetails({
 						className='border-2'
 						setLoading={setLoading}
 						setFormState={setFormData}
+						submitText='Contribute Now'
 						data={[
 							{
 								name: 'contribution',
