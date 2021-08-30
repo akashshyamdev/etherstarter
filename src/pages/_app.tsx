@@ -1,13 +1,19 @@
-// import App from "next/app";
 import type { AppProps /*, AppContext */ } from 'next/app';
+import Head from 'next/head';
 import Layout from '../components/Layout';
 import '../styles/global.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
-		<Layout>
-			<Component {...pageProps} />
-		</Layout>
+		<>
+			<Head>
+				<title>Ether Starter</title>
+			</Head>
+
+			<Layout>
+				<Component {...pageProps} />
+			</Layout>
+		</>
 	);
 }
 
