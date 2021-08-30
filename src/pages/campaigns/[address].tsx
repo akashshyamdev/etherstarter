@@ -64,6 +64,7 @@ export default function CampaignDetails({
 				.contribute()
 				.send({ from: accounts[0], value: web3.utils.toWei(formData.contribution, 'ether') });
 
+			setLoading(false);
 			router.replace(`/campaigns/${address}`);
 		} catch (err) {
 			setMessage(err.message);
