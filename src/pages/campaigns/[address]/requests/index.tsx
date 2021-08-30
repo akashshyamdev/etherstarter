@@ -10,7 +10,7 @@ export default function Requests() {
 	return (
 		<div>
 			<div className='flex flex-row justify-between items-center'>
-				<Heading>Request List</Heading>
+				<Heading style={{ marginBlockEnd: '0' }}>Request List</Heading>
 
 				<Link href={`/campaigns/${address}/requests/new`}>
 					<a className='text-blue-600 text-2xl mt-5'>Create Request</a>
