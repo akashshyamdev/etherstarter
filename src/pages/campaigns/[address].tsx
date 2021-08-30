@@ -42,6 +42,7 @@ export default function CampaignDetails({
 	requestsCount,
 }: CampaignDetailsProps) {
 	const router = useRouter();
+	const { address } = router.query;
 
 	const [loading, setLoading] = React.useState<boolean>(false);
 	const [message, setMessage] = React.useState<string>('');
@@ -53,7 +54,7 @@ export default function CampaignDetails({
 		setLoading(true);
 		setMessage('');
 
-		const campaign = createCampaignInstance(router.query.address as string);
+		const campaign = createCampaignInstance(address as string);
 
 		try {
 			const accounts = await web3.eth.getAccounts();
@@ -61,7 +62,8 @@ export default function CampaignDetails({
 			await campaign.methods
 				.contribute()
 				.send({ from: accounts[0], value: web3.utils.toWei(formData.contribution, 'ether') });
-			router.push('/');
+
+			router.replace(`/campaigns/${address}`);
 		} catch (err) {
 			setMessage(err.message);
 			setLoading(false);
