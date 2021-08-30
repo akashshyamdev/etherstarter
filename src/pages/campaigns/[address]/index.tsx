@@ -1,12 +1,12 @@
 import { useRouter } from 'next/dist/client/router';
-import web3 from '../../services/web3';
-import factory from '../../services/factory';
+import web3 from '../../../services/web3';
+import factory from '../../../services/factory';
 import React from 'react';
-import Card from '../../components/Card';
-import Form from '../../components/Form';
-import Heading from '../../components/Heading';
-import createCampaignInstance from '../../services/campaign';
-import Alert from '../../components/Alert';
+import Card from '../../../components/Card';
+import Form from '../../../components/Form';
+import Heading from '../../../components/Heading';
+import createCampaignInstance from '../../../services/campaign';
+import Alert from '../../../components/Alert';
 
 interface CampaignDetailsProps {
 	minimumContribution: number;
