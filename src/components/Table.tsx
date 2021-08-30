@@ -53,8 +53,8 @@ export default function Table({ data, className, isManager, onApprove, onFinaliz
 							</button>
 						</td>
 
-						{row.complete && (
-							<td className='border px-8 py-4'>
+						<td className='border px-8 py-4'>
+							{row.complete ? (
 								<button
 									type='submit'
 									onClick={() => onFinalize(rowIdx)}
@@ -62,8 +62,10 @@ export default function Table({ data, className, isManager, onApprove, onFinaliz
 								>
 									Finalize Request
 								</button>
-							</td>
-						)}
+							) : (
+								''
+							)}
+						</td>
 					</tr>
 				))}
 			</tbody>
