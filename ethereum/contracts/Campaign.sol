@@ -30,8 +30,8 @@ contract Campaign {
 
 	address public manager;
 
-	string name;
-	string description;
+	string public name;
+	string public description;
 
 	uint256 requestIndex = 0;
 	uint256 public minimumContribution;
