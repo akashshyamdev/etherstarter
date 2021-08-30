@@ -13,7 +13,7 @@ export default function Requests() {
 				<Heading>Request List</Heading>
 
 				<Link href={`/campaigns/${address}/requests/new`}>
-					<a className='text-blue-600 text-2xl mt-5'>View Campaign</a>
+					<a className='text-blue-600 text-2xl mt-5'>Create Request</a>
 				</Link>
 			</div>
 		</div>
