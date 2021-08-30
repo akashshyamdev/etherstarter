@@ -32,7 +32,7 @@ export default function Table({ data, className, isManager, onApprove, onFinaliz
 
 			<tbody>
 				{data.map((row, rowIdx) => (
-					<tr className={`bg-gray-50 ${row.complete && 'text-gray-400'}`} key={rowIdx}>
+					<tr className={`bg-gray-50 ${row.completed && 'text-gray-400'}`} key={rowIdx}>
 						{Object.values(row).map((value, colIdx) => (
 							<td key={colIdx} className='border px-8 py-4'>
 								{typeof value === 'string' ? (
@@ -46,17 +46,21 @@ export default function Table({ data, className, isManager, onApprove, onFinaliz
 						))}
 
 						<td className='border px-8 py-4'>
-							<button
-								type='submit'
-								onClick={() => onApprove(rowIdx)}
-								className='bg-green-400 hover:bg-green-600 text-white font-medium py-2 px-4 rounded focus:outline-none focus:shadow-outline'
-							>
-								Approve Request
-							</button>
+							{!row.completed ? (
+								<button
+									type='submit'
+									onClick={() => onApprove(rowIdx)}
+									className='bg-green-400 hover:bg-green-600 text-white font-medium py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+								>
+									Approve Request
+								</button>
+							) : (
+								<p className='text-center'>&mdash;</p>
+							)}
 						</td>
 
 						<td className='border px-8 py-4'>
-							{parseInt(row.approvers) > parseInt(row.approvers) / 2 ? (
+							{!row.completed && parseInt(row.approvers) > parseInt(row.approvers) / 2 ? (
 								<button
 									type='submit'
 									onClick={() => onFinalize(rowIdx)}
