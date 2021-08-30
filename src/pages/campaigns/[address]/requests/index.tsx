@@ -26,15 +26,12 @@ export async function getServerSideProps({ query }) {
 		completed: complete,
 	}));
 
-	console.log(requests);
 	return { props: { requests } };
 }
 
 export default function Requests({ requests }) {
 	const router = useRouter();
 	const { address } = router.query;
-
-	console.log(requests);
 
 	const onApprove = async (rowIdx: number) => {
 		const campaign = await createCampaignInstance(address as string);
