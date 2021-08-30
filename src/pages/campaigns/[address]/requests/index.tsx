@@ -42,6 +42,8 @@ export default function Requests({ requests }) {
 		const accounts = await web3.eth.getAccounts();
 
 		await campaign.methods.approveRequest(rowIdx).send({ from: accounts[0] });
+
+		router.replace(`/campaigns/${address}/requests`);
 	};
 
 	const onFinalize = async (rowIdx: number) => {
