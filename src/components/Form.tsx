@@ -14,14 +14,27 @@ interface FormProps {
 	formState: Object;
 	className?: string;
 	submitText: string;
+	heading?: string;
 	onSubmit: FormEventHandler<HTMLFormElement>;
 	setLoading: React.Dispatch<React.SetStateAction<FormProps['loading']>>;
 	setFormState: React.Dispatch<React.SetStateAction<FormProps['formState']>>;
 }
 
-export default function Form({ onSubmit, data, className, submitText, formState, setFormState, loading, setLoading }: FormProps) {
+export default function Form({
+	onSubmit,
+	data,
+	className,
+	heading,
+	submitText,
+	formState,
+	setFormState,
+	loading,
+	setLoading,
+}: FormProps) {
 	return (
 		<form onSubmit={onSubmit} className={`bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 ${className}`}>
+			<h4 className='font-display text-3xl mb-5'>{heading}</h4>
+
 			{data.map(({ label, placeholder, name, inputType }, i) => (
 				<div className='mb-4' key={i}>
 					<label className='block font-display tracking-wide text-gray-700 text-sm font-bold mb-2' htmlFor={name}>

@@ -132,6 +132,7 @@ export default function CampaignDetails({
 						setLoading={setLoading}
 						setFormState={setFormData}
 						submitText='Contribute Now'
+						heading='Contribute'
 						data={[
 							{
 								name: 'contribution',
