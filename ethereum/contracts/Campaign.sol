@@ -4,8 +4,12 @@ pragma solidity ^0.8.0;
 contract CampaignFactory {
 	Campaign[] public campaigns;
 
-	function createCampaign(uint256 minimum) public {
-		Campaign newCampaign = new Campaign(minimum, msg.sender);
+	function createCampaign(
+		uint256 minimum,
+		string memory name,
+		string memory description
+	) public {
+		Campaign newCampaign = new Campaign(minimum, msg.sender, name, description);
 		campaigns.push(newCampaign);
 	}
 
@@ -26,6 +30,9 @@ contract Campaign {
 
 	address public manager;
 
+	string name;
+	string description;
+
 	uint256 requestIndex = 0;
 	uint256 public minimumContribution;
 
@@ -40,9 +47,16 @@ contract Campaign {
 		_;
 	}
 
-	constructor(uint256 minimum, address creator) {
+	constructor(
+		uint256 minimum,
+		address creator,
+		string memory nameParam,
+		string memory descriptionParam
+	) {
 		manager = creator;
 		minimumContribution = minimum;
+		name = nameParam;
+		description = descriptionParam;
 	}
 
 	function contribute() public payable {
@@ -53,14 +67,14 @@ contract Campaign {
 	}
 
 	function createRequest(
-		string memory description,
+		string memory descriptionParam,
 		uint256 value,
 		address payable recipient
 	) public restricted {
 		require(value <= address(this).balance);
 		Request storage r = requests[requestIndex];
 
-		r.description = description;
+		r.description = descriptionParam;
 		r.recipient = recipient;
 		r.value = value;
 		r.complete = false;
