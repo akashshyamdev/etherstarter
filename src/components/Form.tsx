@@ -13,12 +13,13 @@ interface FormProps {
 	data: FormData[];
 	formState: Object;
 	className?: string;
+	submitText: string;
 	onSubmit: FormEventHandler<HTMLFormElement>;
 	setLoading: React.Dispatch<React.SetStateAction<FormProps['loading']>>;
 	setFormState: React.Dispatch<React.SetStateAction<FormProps['formState']>>;
 }
 
-export default function Form({ onSubmit, data, className, formState, setFormState, loading, setLoading }: FormProps) {
+export default function Form({ onSubmit, data, className, submitText, formState, setFormState, loading, setLoading }: FormProps) {
 	return (
 		<form onSubmit={onSubmit} className={`bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 ${className}`}>
 			{data.map(({ label, placeholder, name, inputType }, i) => (
@@ -45,7 +46,7 @@ export default function Form({ onSubmit, data, className, formState, setFormStat
 						type='submit'
 						className='bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded focus:outline-none focus:shadow-outline'
 					>
-						Create Campaign
+						{submitText}
 					</button>
 				) : (
 					<Loader />
