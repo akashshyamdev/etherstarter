@@ -63,7 +63,7 @@ export default function Table({ data, className, isManager, onApprove, onFinaliz
 									Finalize Request
 								</button>
 							) : (
-								''
+								<p className='text-center'>&mdash;</p>
 							)}
 						</td>
 					</tr>
