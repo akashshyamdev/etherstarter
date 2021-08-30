@@ -7,6 +7,7 @@ import Form from '../../../components/Form';
 import Heading from '../../../components/Heading';
 import createCampaignInstance from '../../../services/campaign';
 import Alert from '../../../components/Alert';
+import Link from 'next/link';
 
 interface CampaignDetailsProps {
 	minimumContribution: number;
@@ -75,9 +76,15 @@ export default function CampaignDetails({
 
 	return (
 		<div>
-			<Heading>Campaign Details</Heading>
+			<div className='flex flex-row justify-between items-center'>
+				<Heading>Campaign Details</Heading>
 
-			<div className='flex flex-row'>
+				<Link href={`/campaigns/${address}/requests`}>
+					<a className='text-blue-600 text-2xl mt-5'>Request List</a>
+				</Link>
+			</div>
+
+			<div className='flex flex-row mt-10'>
 				{/* Cards */}
 				<div className='grid grid-cols-2 gap-x-16 gap-y-10 w-3/5'>
 					<Card
