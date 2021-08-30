@@ -25,12 +25,20 @@ export default function NewRequest() {
 		try {
 			const accounts = await web3.eth.getAccounts();
 
-			await campaign.methods
-				.createRequest(formData.description, web3.utils.toWei(formData.amount, 'ether'), formData.receiver)
-				.send({ from: accounts[0] });
+			const contractBalance = web3.utils.fromWei(await web3.eth.getBalance(campaign._address), 'ether');
 
-			setFormData({ description: '', amount: 0, receiver: '' });
-			setLoading(false);
+			console.log(contractBalance);
+
+			if (contractBalance < formData.amount) {
+				setLoading(false);
+				setMessage('Campaign money is less than amount required for this request. Try raising more money');
+			} else {
+				await campaign.methods
+					.createRequest(formData.description, web3.utils.toWei(formData.amount, 'ether'), formData.receiver)
+					.send({ from: accounts[0] });
+
+				router.push(`/campaigns/${address}/requests`);
+			}
 		} catch (err) {
 			setMessage(err.message);
 			setLoading(false);
