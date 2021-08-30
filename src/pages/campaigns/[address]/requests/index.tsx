@@ -23,8 +23,11 @@ export async function getServerSideProps({ query }) {
 		description,
 		value: web3.utils.fromWei(value, 'ether'),
 		'approval Count': `${approvalCount} / ${funders}`,
+		approvers: approvalCount,
 		completed: complete,
 	}));
+
+	console.log(requests);
 
 	return { props: { requests } };
 }
@@ -32,6 +35,8 @@ export async function getServerSideProps({ query }) {
 export default function Requests({ requests }) {
 	const router = useRouter();
 	const { address } = router.query;
+
+	console.log(requests);
 
 	const onApprove = async (rowIdx: number) => {
 		const campaign = await createCampaignInstance(address as string);
@@ -49,6 +54,8 @@ export default function Requests({ requests }) {
 		const accounts = await web3.eth.getAccounts();
 
 		await campaign.methods.finalizeRequest(rowIdx).send({ from: accounts[0] });
+
+		router.replace(`/campaigns/${address}/requests`);
 	};
 
 	return (

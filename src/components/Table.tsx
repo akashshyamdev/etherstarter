@@ -17,15 +17,17 @@ export default function Table({ data, className, isManager, onApprove, onFinaliz
 	return (
 		<table className={`${className}`}>
 			<thead className='bg-gray-100 rounded-t-xl uppercase text-gray-700 font-thin font-sans tracking-wider'>
-				{Object.keys(data[0]).map((key, index) => (
-					<th className='bg-blue-100 border text-left px-8 py-4' key={index}>
-						{key}
-					</th>
-				))}
+				<tr>
+					{Object.keys(data[0]).map((key, index) => (
+						<th className='bg-blue-100 border text-left px-8 py-4' key={index}>
+							{key}
+						</th>
+					))}
 
-				<th className='bg-blue-100 text-center border px-8 py-4'>Approve</th>
+					<th className='bg-blue-100 text-center border px-8 py-4'>Approve</th>
 
-				{isManager && <th className='bg-blue-100 text-center border px-8 py-4'>Finalize</th>}
+					{isManager && <th className='bg-blue-100 text-center border px-8 py-4'>Finalize</th>}
+				</tr>
 			</thead>
 
 			<tbody>
@@ -54,7 +56,7 @@ export default function Table({ data, className, isManager, onApprove, onFinaliz
 						</td>
 
 						<td className='border px-8 py-4'>
-							{row.complete ? (
+							{parseInt(row.approvers) > parseInt(row.approvers) / 2 ? (
 								<button
 									type='submit'
 									onClick={() => onFinalize(rowIdx)}
