@@ -46,6 +46,8 @@ export default function NewCampaign() {
 					setFormState={setFormData}
 					submitText='Create Campaign'
 					data={[
+						{ name: 'name', label: 'Name', placeholder: '' },
+						{ name: 'description', label: 'Description', placeholder: '' },
 						{ name: 'minContribution', label: 'Minimum Contribution(wei)', placeholder: '1000', inputType: 'number' },
 					]}
 				/>
