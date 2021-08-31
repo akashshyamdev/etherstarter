@@ -9,7 +9,7 @@ import Form from '../../components/Form';
 export default function NewCampaign() {
 	const router = useRouter();
 
-	const [formData, setFormData] = React.useState({ minContribution: 0 });
+	const [formData, setFormData] = React.useState({ minContribution: 0, name: '', description: '' });
 	const [loading, setLoading] = React.useState<boolean>(false);
 	const [message, setMessage] = React.useState<string>('');
 
@@ -22,7 +22,9 @@ export default function NewCampaign() {
 		try {
 			const accounts = await web3.eth.getAccounts();
 
-			await factory.methods.createCampaign(formData.minContribution).send({ from: accounts[0] });
+			await factory.methods
+				.createCampaign(formData.minContribution, formData.name, formData.description)
+				.send({ from: accounts[0] });
 
 			router.push('/');
 		} catch (err) {
