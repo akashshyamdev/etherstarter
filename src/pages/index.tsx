@@ -1,10 +1,23 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+
 import Link from 'next/link';
 import factory from '../services/factory';
 import Heading from '../components/Heading';
+import createCampaignInstance from '../services/campaign';
 
 export async function getServerSideProps(context) {
-	const campaigns = await factory.methods?.getCampaigns().call();
+	const campaignAddresses = await factory.methods?.getCampaigns().call();
+	const campaignsPromises = campaignAddresses.map((address) => createCampaignInstance(address));
+
+	const rawCampaigns = await Promise.all(campaignsPromises);
+
+	const rawCampaignsPromises = rawCampaigns.map(async (campaign: any) => ({
+		name: await campaign.methods.name().call(),
+		description: await campaign.methods.description().call(),
+		address: campaign.options.address,
+	}));
+
+	const campaigns = await Promise.all(rawCampaignsPromises);
 
 	return {
 		props: { campaigns },
@@ -12,6 +25,7 @@ export async function getServerSideProps(context) {
 }
 
 export default function CampaignList({ campaigns }) {
+	console.log(campaigns);
 	return (
 		<>
 			<div className='flex flex-row justify-between'>
@@ -19,12 +33,13 @@ export default function CampaignList({ campaigns }) {
 			</div>
 
 			<div className='w-3/5'>
-				{campaigns.map((address: string) => (
+				{campaigns.map(({ name, description, address }) => (
 					<div key={address} className='border rounded-lg px-7 py-7'>
-						<h4 className='text-2xl'>{address}</h4>
+						<h4 className='text-3xl'>{name}</h4>
+						<p className='text-lg mb-5'>{description}</p>
 
 						<Link href={`/campaigns/${address}`}>
-							<a className='text-blue-600 mt-5'>View Campaign</a>
+							<a className='text-blue-600'>View Campaign</a>
 						</Link>
 					</div>
 				))}
