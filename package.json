@@ -5,7 +5,8 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "mocha -w test/** ",
-		"dev": "next dev"
+		"dev": "next dev",
+		"deploy:contract": "node ./ethereum/compile.js && node ./ethereum/deploy.js"
 	},
 	"repository": {
 		"type": "git",
